@@ -37,6 +37,8 @@ const useTypeScript = fs.existsSync(paths.appTsConfig);
 // style files regexes
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
+const lessRegex = /\.less$/;
+const lessModuleRegex = /\.module\.less$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
@@ -347,6 +349,10 @@ module.exports = function(webpackEnv) {
                       },
                     },
                   ],
+					['import',{
+						libraryName:'antd',
+						style:true
+					}]
                 ],
                 // This is a feature of `babel-loader` for webpack (not Babel itself).
                 // It enables caching results in ./node_modules/.cache/babel-loader/
@@ -388,6 +394,35 @@ module.exports = function(webpackEnv) {
             // In production, we use MiniCSSExtractPlugin to extract that CSS
             // to a file, but in development "style" loader enables hot editing
             // of CSS.
+	          // By default we support CSS Modules with the extension .module.css
+	          {
+		          test: lessRegex,
+		          exclude: lessModuleRegex,
+		          use: getStyleLoaders({
+			          importLoaders: 1,
+			          sourceMap: isEnvProduction && shouldUseSourceMap,
+		          },
+		          'less-loader'
+		          ),
+		          // Don't consider CSS imports dead code even if the
+		          // containing package claims to have no side effects.
+		          // Remove this when webpack adds a warning or an error for this.
+		          // See https://github.com/webpack/webpack/issues/6571
+		          sideEffects: true,
+	          },
+	          // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
+	          // using the extension .module.css
+	          {
+		          test: lessModuleRegex,
+		          use: getStyleLoaders({
+			          importLoaders: 1,
+			          sourceMap: isEnvProduction && shouldUseSourceMap,
+			          modules: true,
+			          getLocalIdent: getCSSModuleLocalIdent,
+		          },
+			          'less-loader'
+		          ),
+	          },
             // By default we support CSS Modules with the extension .module.css
             {
               test: cssRegex,

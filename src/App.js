@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import {Button} from 'antd'
-import 'antd/dist/antd.css'
+import './App.less'
 class App extends Component {
   render() {
     return (
       <div className="App">
 	      <Button>xxx</Button>
+	      <div className='id'>id</div>
       </div>
     );
   }
