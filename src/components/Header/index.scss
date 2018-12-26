@@ -1,0 +1,14 @@
+
+.nav-header{
+  border:1px solid red;
+  &-info{
+    text-align: right;
+  }
+  &-detail{
+    text-align: center;
+    &-info{
+      text-align: right;
+    }
+  }
+
+}
