@@ -1,10 +1,10 @@
 import React, {Component} from "react";
-
+import './index.scss'
 export default class Footer extends Component{
 	render(){
 		return(
-			<div>
-				Footer page
+			<div className="footer">
+				公司地址：嘻嘻嘻
 			</div>
 		)
 	}

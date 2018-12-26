@@ -24,7 +24,9 @@ export default class NavList extends Component{
 					<img src="/assets/logo.svg" alt=""/>
 					<h1>Admin-End</h1>
 				</div>
-				<Menu theme="dark">
+				<Menu
+					// theme="dark"
+				>
 						{renderMenuConfig(menuConfig)}
 				</Menu>
 			</div>

@@ -1,10 +1,9 @@
-$navListBackgroundColor: #ccc;
+$navListBackgroundColor: #fff;
 .navList{
   height: ceil(100vh);
   background-color: $navListBackgroundColor;
 }
 .logo{
-  border:1px solid red;
   img{
     width: 100px;
     height: 100px;
