@@ -398,12 +398,20 @@ module.exports = function(webpackEnv) {
 	          {
 		          test: lessRegex,
 		          exclude: lessModuleRegex,
-		          use: getStyleLoaders({
-			          importLoaders: 1,
-			          sourceMap: isEnvProduction && shouldUseSourceMap,
+		          use: [{
+			          loader: 'style-loader',
+		          }, {
+			          loader: 'css-loader', // translates CSS into CommonJS
+		          }, {
+			          loader: 'less-loader', // compiles Less to CSS
+			          options:{
+				          modifyVars: {
+					          "@primary-color": "#f9c700",
+				          },
+				          javascriptEnabled: true,
+			          }
 		          },
-		          'less-loader'
-		          ),
+		          ],
 		          // Don't consider CSS imports dead code even if the
 		          // containing package claims to have no side effects.
 		          // Remove this when webpack adds a warning or an error for this.
@@ -414,14 +422,6 @@ module.exports = function(webpackEnv) {
 	          // using the extension .module.css
 	          {
 		          test: lessModuleRegex,
-		          use: getStyleLoaders({
-			          importLoaders: 1,
-			          sourceMap: isEnvProduction && shouldUseSourceMap,
-			          modules: true,
-			          getLocalIdent: getCSSModuleLocalIdent,
-		          },
-			          'less-loader'
-		          ),
 	          },
             // By default we support CSS Modules with the extension .module.css
             {
