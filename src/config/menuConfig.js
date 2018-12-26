@@ -4,12 +4,12 @@ const menuList = [
 		key: '/admin/home'
 	},
 	{
-		title: 'XX',
-		key: '/admin/xx',
+		title: '个人信息',
+		key: '/admin/info',
 		children: [
 			{
-				title: 'bb',
-				key: '/admin/xx/bb',
+				title: '详情',
+				key: '/admin/info/detail',
 			},
 			{
 				title: 'cc',
